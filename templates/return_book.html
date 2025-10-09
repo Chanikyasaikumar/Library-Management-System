@@ -1,0 +1,30 @@
+{% include'lhead.html'%}
+
+<div class="row">
+    <div class="col-4"></div>
+
+    <div class="col-4">
+        <div class="mt-100 ml-50 card p-20">
+            <form action="return_book1">
+                <div>
+                    <input type="hidden" value="{{borrowing_id}}" name="borrowing_id">
+                </div>
+                <div>
+                    <label class="text-bold input-group">Choose Library</label>
+                    <select name="librarian_id" class="box p-10">
+                        <option>Choose Library</option>
+                        {% for librarian in librarians %}
+                        {% set location = get_location_name_by_location_id(librarian['location'])%}
+                        <option value="{{librarian['_id']}}" class="form-input">{{librarian['librarian_name']}}-{{location['location_name']}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mt-20">
+                    <input type="submit" value="Return" class="p-10 btn box">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-4"></div>
+</div>

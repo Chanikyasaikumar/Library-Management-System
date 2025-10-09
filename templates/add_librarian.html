@@ -1,0 +1,116 @@
+{% include 'ahead.html' %}
+
+<body class="admin">
+    <div class="row mt-50">
+        <div class="col-4">
+            <div class="ml-10 p-30">
+                    <div class="card-2 p-15">
+                        <div class=" text-center">New librarian Registration</div>
+                        <form action="library_registration_action" method="post">
+                            <div>
+                                <label for="library_title">Library_Title</label>
+                                <div class="input-group">
+                                    <input type="text" id="library_title" name="library_title" class="form-input box" required placeholder="Enter Library_Title">
+                                </div>
+                                <div>
+                                    <label for="librarian_name">Librarian_Name</label>
+                                    <div class="input-group">
+                                        <input type="text" id="librarian_name" name="librarian_name" class="form-input box" required placeholder="Enter Library_Name">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="email">Email</label>
+                                    <div class="input-group">
+                                        <input type="email" id="email" name="email" class="form-input box" required placeholder="Enter Email ID">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="phone">Phone Number</label>
+                                    <div class="input-group">
+                                        <input type="number" id="phone" name="phone" class="form-input box" required placeholder="Enter Phone Number">
+                                    </div>
+                                </div>
+                
+                                <div>
+                                    <label for="password">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" id="password" name="password" class="form-input box" required placeholder="Enter Password">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <div class="input-group">
+                                        <input type="password" id="confirm_password" name="confirm_password" class="form-input box" required placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="address">Address</label>
+                                    <div class="input-group"> 
+                                        <textarea id="address" name="address" class="form-input box" required placeholder="Enter Address"></textarea>
+                                    </div>
+                                </div>
+            
+                                <div>
+                                    <div>Location</div>
+
+                                    <select class="form-input box" name="location" required>
+                                        <option value="">Choose Location</option>
+                                        {% for location in locations %}
+                                            <option value="{{location['_id']}}">{{location['location_name']}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+            
+                                <div class="mt-20">
+                                    <input type="submit" class="btn-primary width p-15 box" value="Register">
+                                </div>
+                            </div>    
+                        </form>
+                    </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card-5 p-10 mt-30">
+                <label class="text-center p-20 text-bold">Librarians</label>
+                <table border="1" class="table mt-10">
+                    <thead>
+                        <tr >
+                            <th class="p-10">Library_Title</th>
+                            <th>librarian_Name</th>
+                            <th>E-mail</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        {% for librarian in librarians %}
+                        {% set location = get_location_name_by_location_id(librarian['location']) %}
+                            <tr>
+                                <td class="p-10 ">{{librarian['library_title']}}</td>
+                                <td>{{librarian['librarian_name']}}</td>
+                                <td>{{librarian['email']}}</td>
+                                <td>{{librarian['phone']}}</td>
+                                <td>{{librarian['address']}}</td>
+                                <td>{{location['location_name']}}</td>
+                                <td><a href="update_librarian?librarian_id={{librarian['_id']}}" class="tn p-5" style="background-color:orange">Update</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+

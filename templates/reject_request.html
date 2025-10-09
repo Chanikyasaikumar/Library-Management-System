@@ -1,0 +1,24 @@
+{% if session['role'] =='user'%}
+    {% include 'uhead.html'%}
+{% elif session['role']=='librarian'%}
+    {% include 'lhead.html'%}
+{% elif session['role']=='admin'%}
+{% include 'ahead.html'%}
+{% endif %}
+
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 card mt-100 p-20">
+        <form action="reject_request_action">
+            <input type="hidden" value="{{borrowing_id}}" name="borrowing_id">
+            <label for="reject_request">Reject Request Reason</label>
+            <textarea id="reject_request" name="reject_request" class="mt-15"></textarea>
+
+            <div class="mt-10">
+                <input type="submit" value="Reject" class="p-10">
+            </div>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>

@@ -1,0 +1,38 @@
+{% include 'head.html' %}
+<body>
+    <div class="row hero lbg">
+        <div class="col-6  d-flex align-items-center">
+            <div class="container">
+                <div class="card3 p-20 mt-100 ml-100">
+                    <form action="librarian_login_action" method="post">
+                        <div class="card-header h5 text-center mt-15 mb-30">Librarian Login</div>
+                        
+                        <label for="email">Email</label>
+                        <div class="mt-15">
+                            <div class="input-group mt-10">
+                                <input type="text" name="email" id="email" class="form-input box" placeholder="E-mail" required>
+                            </div>
+                        </div>
+    
+                        <div class="mt-15">
+                            <label for="password">Password</label>
+                            <div class="input-group mt-10">
+                                <input type="password" name="password" id="password" class="form-input box" placeholder="Password" required>
+                            </div>
+                        </div>
+    
+                        <div class="mt-30">
+                            <input type="submit" class="btn btn-primary" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-6"></div>
+    </div>
+</body>
+    
+    
+
+

@@ -1,0 +1,29 @@
+{% if session['role'] =='admin'%}
+    {% include 'ahead.html'%}
+{% elif session['role']=='librarian'%}
+    {% include 'lhead.html'%}
+{% endif %}
+
+<body class="admin">
+    <div class="row mt-10">
+        <div class="col-4"></div>
+        <div class="col-4 card ml-20">
+            <div class="" style="text-align:center;font-size:16px">Update Media Copies</div>
+            <form action="update_media_copies_action" method="post"  class="p-15 ml-10 mt-10">
+                <input type="hidden" name="media_id" value="{{media_id}}">
+                        <div>
+                             <label for="book_copies">Book Copies</label>
+                             <div class="input-group">
+                                 <input type="number" id="book_copies" name="book_copies" class="p-10 mt-5 box width"  placeholder="Enter No.Of Copies">
+                             </div>
+                        </div>
+
+                    <div class="mt-10">
+                        <input type="submit" class="btn" value="Update Book Copy">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>

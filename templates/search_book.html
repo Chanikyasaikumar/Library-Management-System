@@ -1,0 +1,17 @@
+{% include 'uhead.html'%}
+<body class="uhome">
+<form action="search_book">
+    <div class="row p-10 mt-20">
+        <div class="col-3"></div>
+        <div class="col-3">
+            <input type="radio" name="book" id="book" value="book" onchange="this.form.submit()">
+            <label for="book" class="text-white">Book</label>
+        </div>
+        <div class="col-3">
+            <input type="radio" name="media" id="media" value="media" onchange="this.form.submit()">
+            <label for="media" class="text-white">Media</label>
+        </div>
+    </div>
+</form>
+
+</body>

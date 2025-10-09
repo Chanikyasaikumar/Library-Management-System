@@ -1,0 +1,119 @@
+{% if session['role'] =='admin'%}
+    {% include 'ahead.html'%}
+{% elif session['role']=='librarian'%}
+    {% include 'lhead.html'%}
+{% endif %}
+
+<body class="admin">
+<form action="add_books">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8 mt-10">
+            <input type="text" name="search_keyword" value="{{search_keyword}}" onchange="this.form.submit()" placeholder="Search books..." class="search-input box p-15" required style="width:40%">
+        </div>
+    </div>
+</form>
+    <div class="row mt-10">
+        <div class="col-4 card ml-20">
+            <div class="" style="text-align:center;font-size:16px">Add New Book</div>
+            <form action="add_book_action" method="post" enctype="multipart/form-data" class="p-15 ml-10 mt-10">
+                <div>
+                     <div>
+                         <label for="book_title">Book_Title</label>
+                         <div class="input-group">
+                             <input type="text" id="book_title" name="book_title" class=" p-10 box mt-5 mb-10 width" required placeholder="Enter Book_Title">
+                         </div>
+                     </div>
+            
+                    <div class="mt-10">
+                        <label for="author">Author Name</label>
+                        <div class="input-group">
+                            <input type="text" id="author" name="author" class="p-10 mt-5 box width" required placeholder="Enter Author Name">
+                        </div>
+                    </div>
+
+                    {% if session['role']=='librarian'%}
+                        <div>
+                             <label for="book_copies">Book Copies</label>
+                             <div class="input-group">
+                                 <input type="number" id="book_copies" name="book_copies" class="p-10 mt-5 box width" required placeholder="Enter No.Of Copies">
+                             </div>
+                        </div>
+                    {% endif %}
+
+                    <div>
+                         <label for="year">Year Of Release</label>
+                         <div class="input-group">
+                             <input type="number" min="1900" id="year" name="year" class="p-10 mt-5 box width" required placeholder="Enter Year Of Release">
+                         </div>
+                    </div>
+
+            
+                    <div>
+                         <label for="description">Description</label>
+                         <div class="input-group">
+                             <input type="text" id="description" name="description" class="p-10 mt-5 box width" required placeholder="Description about book">
+                         </div>
+                    </div>
+            
+                    <div>
+                        <label for="picture">Picture</label>
+                        <div class="">
+                            <input type="file" id="picture" name="picture" class="p-5 ">
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <label>Genre</label>
+                        <select name="genre" class="width p-10 box" required>
+                            <option value="">Choose genre</option>
+                            {% for genre in genres %}
+                                <option value="{{genre['_id']}}">{{genre['genre_name']}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+            
+                    <div class="mt-10">
+                        <input type="submit" class="btn" value="Add Book">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-8 ml-20 ">
+            {% if session['role'] == "admin" %}
+                <div class="row">
+                {% for book in books %}
+                {% set genre =get_genre_name_by_genre_id(book['genre_id'])%}
+                <div class="row col-3 p-10 ">
+                    <div class="cardd text-center">
+                        <div><img src="../static/book_image/{{book['picture']}}" width="100%" height="50%"></div>
+                        <div class="mt-5 h4">{{book['book_title']}}</div>
+                        <div class="mt-5" style="font-size:15px">Book Type: {{book['book_type']}}</div>
+                        <div class="mt-5" style="font-size:15px">Author  : {{book['author']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;"> Genre:</h4> {{genre['genre_name']}}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% elif session['role'] == "librarian" %}
+                <div class="row">
+                    {% for book in books %}
+                      {% set genre =get_genre_name_by_genre_id(book['genre_id'])%}
+                        <div class="row col-3 p-10 ">
+                            <div class="cardd text-center">
+                                <div><img src="../static/book_image/{{book['picture']}}" width="100%" height="50%"></div>
+                                <div class="mt-5 h4">{{book['book_title']}}</div>
+                                <div class="mt-5"><h4 style="display: inline-block;">Author:</h4> {{book['author']}}</div>
+                                <div class="mt-5"><h4 style="display: inline-block;"> Genre:</h4> {{genre['genre_name']}}</div>
+                                <div class="p-10">
+                                    <a href="view_copies?book_id={{book['_id']}}"  class="text" style="background:darkorange;color:white;border-radius:3px">View Copies</a>
+                                    <a href="update_book_copies?book_id={{book['_id']}}" class="text" style="background:darkorange;color:white;border-radius:3px">Update Copies</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>

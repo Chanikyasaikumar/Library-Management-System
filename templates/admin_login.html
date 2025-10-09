@@ -1,0 +1,38 @@
+{% include 'links.html'%}
+{% include 'head.html' %}
+<body>
+    <div class="row abg hero">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="mt-100">
+                <div class="card1 p-20">
+                    <form action="admin_login_action" method="post">
+                        <div class=" h5 text-center mb-30 text-white">Admin Login</div>
+                        <label for="username" class="text-white">Username</label>
+                        <div>
+                            <div class="input-group mt-10">
+                                <input type="text" name="username" id="username" class="form-input box" placeholder=" Username" required>
+                            </div>
+                        </div>
+    
+                        <div class="mt-20">
+                            <label for="password" class="text-white">Password</label>
+                            <div class="input-group">
+                                <input type="password" name="password" id="password" class="form-input box mt-10" placeholder=" Password" required>
+                            </div>
+                        </div>
+
+                        <div class="mt-40">
+                            <input type="submit" class="btn-grad" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class=""></div>
+        </div>
+    </div>
+</body>
+
+

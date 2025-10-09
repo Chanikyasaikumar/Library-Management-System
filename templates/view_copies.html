@@ -1,0 +1,17 @@
+{% if session['role'] =='admin'%}
+    {% include 'ahead.html'%}
+{% elif session['role']=='librarian'%}
+    {% include 'lhead.html'%}
+{% endif %}
+
+<div class="text-center mt-100">
+<label class="h3">Number Of Copies</label>
+{% for Copie in Copies%}
+        {% set is_assign = get_is_book_assigned(1,Copie['_id'])%}
+    {% if is_assign == 0%}
+    <div class="mt-15"><h4 style="display: inline-block;">Book_Copies:</h4>{{Copie['book_copy_number']}}</div>
+    {% endif%}
+
+{% endfor %}
+
+</div>

@@ -1,0 +1,94 @@
+{% include 'head.html' %}
+<div class="row ubg hero">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class=" mt-20">
+            <div class="card-2 p-30">
+                <form action="user_registration_action" method="post" class="">
+
+                    <div class="mt-10">
+                        <div>Select Access_Type
+                            <select name="access_type" required>
+                                <option value="">Choose Role</option>
+                                <option value="student" >Student</option>
+                                <option value="faculty" >Faculty</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6 p-10">
+                            <label for="name">Name</label>
+                            <div class="input-group">
+                                <input type="text" id="name" name="name" class="form-input box p-5" required placeholder="Enter Your Name">
+                            </div>
+                        </div>
+                    
+                        <div class="col-6 p-10">
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                                <input type="email" id="email" name="email" class="form-input box p-5" required placeholder="Enter Email ID">
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="mt-10">
+                        <label for="phone">Phone Number</label>
+                        <div class="input-group">
+                            <input type="number" id="phone" name="phone" class=" form-input box" required placeholder="Enter Phone Number">
+                        </div>
+                    </div>
+
+                    <div class=" row">
+                        <div class="col-6 p-10">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <input type="password" id="password" name="password" class="form-input p-5 box" required placeholder="Enter Password">
+                            </div>
+                        </div>
+
+                        <div class="col-6 p-10">
+                            <label for="confirm_password">Confirm_Password</label>
+                            <div class="input-group">
+                                <input type="password" id="confirm_password" name="confirm_password" class="form-input p-5 box" required placeholder="Confirm Password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <label for="address">Address</label>
+                        <div class="input-group">
+                            <textarea id="address" name="address" class="form-input p-5 box" required placeholder="Enter Address"></textarea>
+                        </div>
+                    </div>
+                
+                    <div class="mt-10 ">
+                        <label for="state">State</label>
+                        <div class="input-group">
+                            <input type="text" id="state" name="state" class="form-input p-5 box" required placeholder="Enter State">
+                        </div>
+                    </div>
+                
+                    <div class="mt-10 ">
+                        <label for="city">City</label>
+                        <div class="input-group">
+                            <input type="text" id="city" name="city" class="form-input p-5 box" required placeholder="Enter City">
+                        </div>
+                    </div>
+                
+                    <div class="mt-10 ">
+                        <label for="zip_code">Zip_Code</label>
+                        <div class="input-group">
+                            <input type="number" id="zip_code" name="zip_code" class="form-input p-5 box" required placeholder="Enter Zip Code">
+                        </div>
+                    </div>
+                
+                    <div class="mt-20 p-10">
+                        <input type="submit" class="btn box p-15" value="Register">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>

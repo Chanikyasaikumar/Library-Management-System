@@ -1,0 +1,105 @@
+{% if session['role'] =='user'%}
+    {% include 'uhead.html'%}
+{% elif session['role']=='librarian'%}
+    {% include 'lhead.html'%}
+{% elif session['role']=='admin'%}
+{% include 'ahead.html'%}
+{% endif %}
+<div class="row">
+    {% for borrowing in borrowings%}
+        {% if 'borrowing_date' in borrowing %}
+            {% set fine,is_expired = get_fine(borrowing['returning_date'],borrowing['_id'])%}
+        {% endif %}
+
+    {% set users=get_user_name_by_user_id(borrowing['user_id']) %}
+    {% set librarians = get_library_librarian_id(borrowing['librarian_id'])%}
+    {% set return_librarians = get_library_librarian_id(borrowing['returnlibrarian_id'])%}
+    {% set locations = get_location_name_by_location_id(librarians['location'])%}
+    {% set return_locations = get_location_name_by_location_id(return_librarians['location'])%}
+    <div class="p-10 card4 mt-20">
+        <div class="row  p-20 " style="width:100%">
+            <div class="col-6 p-30">
+                {% if 'media_id' in borrowing %}
+                    {% set media= get_media_by_book_copies_id(borrowing['media_id']) %}
+                    <div><img src="../static/media_image/{{media['picture']}}" width="100%" height="200px"></div>
+                    <div class="mt-5"><h4 style="display: inline-block;">{{media['media_title']}}</h4></div>
+                    <div class="mt-5"><h4 style="display: inline-block;">{{media['media_author']}}</h4></div>
+
+                {% elif 'book_id' in borrowing %}
+                    {% set book= get_book_by_book_copies_id(borrowing['book_id']) %}
+                    <div><img src="../static/book_image/{{book['picture']}}" width="100%" height=200px"></div>
+                    <div class="mt-5 "><h4 style="display: inline-block;">{{book['book_title']}}</h4></div>
+                    <div class="mt-5"><h4 style="display: inline-block;">Author:</h4> {{book['author']}}</div>
+                {% endif %}
+            </div>
+            <div class=" col-6 p-30">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mt-5" style="font-size:14px">Status : </div>
+                        <div class="mt-5"><h3 style="display: inline-block;">{{borrowing['status']}}</h3></div>
+                        <div class="mt-10" style="font-size:14px">Requested by : </div>
+                        <div class="mt-5"><h3 style="display: inline-block;">{{users['name']}}</h3></div>
+                        <div class="mt-5" style="font-size:14px">Requested on : </div>
+                        <div class="mt-5"><h4 style="display: inline-block;">{{borrowing['request_date'].strftime("%m-%d-%Y %I:%M %p")}}</h4></div>
+                        {% if 'borrowing_date' in borrowing%}
+                        <div class="mt-5" style="font-size:14px"> Borrowing Date : </div>
+                        <div class="mt-5"><h4 style="display: inline-block;">{{borrowing['borrowing_date'].strftime("%m-%d-%Y %I:%M %p")}}</h4></div>
+                        <div class="mt-5" style="font-size:14px">Return Date : </div>
+                        <div class="mt-5"><h4 style="display: inline-block;">{{borrowing['returning_date'].strftime("%m-%d-%Y %I:%M %p")}}</h4></div>
+                        {% endif%}
+                        {% if borrowing['status']=="Book Returned" %}
+                        <div class="mt-5" style="font-size:14px">Fine ($): </div>
+                        {% endif %}
+                        <div class="mt-5"><h4 style="display: inline-block;">  {{fine}}</h4></div>
+                          {% if borrowing['status2']=='Fine Paid'%}
+                        <div class="mt-5" style="font-size:14px">Fine Paid : </div>
+                        <div class="mt-5"><h4 style="display: inline-block;"> $ {{fine}}</h4></div>
+                        {% endif%}
+                         {% if session['role']=='user'%}
+                            {% if borrowing['status']=="Book Returned" %}
+                                {% if int(fine)>0%}
+                                     {% if borrowing['status2']!='Fine Paid'%}
+                                        <a class="text" href="pay_fine?borrowing_id={{borrowing['_id']}}&fine={{fine}}" style="background:lightred;color:white;border-radius:3px">Pay Fine</a>
+                                     {% endif%}
+                                {% endif%}
+                            {% endif %}
+                         {% endif %}
+                    </div>
+                    <div class="col-6">
+                        <div class="mt-5" style="font-size:14px">Librarian  : </div>
+                        <div class="mt-5"><h3 style="display: inline-block;">{{librarians['librarian_name']}}, {{locations['location_name']}}</h3></div>
+                        <div class="mt-5" style="font-size:14px">Return Librarian  : </div>
+                        <div class="mt-5"><h3 style="display: inline-block;">{{return_librarians['librarian_name']}}, {{return_locations['location_name']}}</h3></div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% if session['role']=='librarian'%}
+                {% if borrowing['status']=="Requested" %}
+                    <a class="p-10 text" href="assign_book?borrowing_id={{borrowing['_id']}}&librarian_id={{librarians['_id']}}" style="background:darkorange;color:white;border-radius:3px">Assign</a>
+                    <a class=" p-10 ml-20 text1" href="reject?borrowing_id={{borrowing['_id']}}" style="background:red;color:white;border-radius:3px">Reject</a>
+                {% endif %}
+
+                {% if borrowing['status2']=="Location Change Request Sent" %}
+                    <a class="p-10 text" href="/accept_request?borrowing_id={{borrowing['_id']}}" style="background:darkorange;color:white;border-radius:3px">Accept Return Request</a>
+                      <a class="p-10 ml-10 text" href="/reject_request?borrowing_id={{borrowing['_id']}}" style="background:red;color:white;border-radius:3px">Reject Return Request</a>
+                {% endif %}
+
+            {% endif %}
+
+            {% if session['role']=='user'%}
+                {% if borrowing['status']=="Assigned" %}
+                    <a class="p-10 text" href="return_book?borrowing_id={{borrowing['_id']}}" style="background:darkorange;color:white;border-radius:3px">Return</a>
+                    <a class="p-10 ml-20 text" href="renewal_book?borrowing_id={{borrowing['_id']}}" style="background:darkorange;color:white;border-radius:3px">Renewal</a>
+                {% endif %}
+            {% endif %}
+
+            {% if borrowing['status2'] == "Fine Paid"  %}
+                <a class="p-10 ml-20 text" href="view_payments?borrowing_id={{borrowing['_id']}}" style="background:darkorange;color:white;border-radius:3px">View Payments</a>
+            {% endif%}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

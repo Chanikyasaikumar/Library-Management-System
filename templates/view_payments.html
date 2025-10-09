@@ -1,0 +1,41 @@
+{% if session['role']=='user'%}
+{% include 'uhead.html'%}
+{% elif session['role']=='librarian'%}
+{% include 'lhead.html'%}
+{% elif session['role']=='admin'%}
+{% include 'ahead.html'%}
+{% endif %}
+
+
+
+<div class="row mt-100">
+    <div class="col-4"></div>
+    <div class="col-4 cardu p-10">
+        <table border="1" class="table ">
+        <thead>
+            <tr >
+                <th class="p-10">Card_Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>User_Name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for payment in payments%}
+            {% set borrowing = get_borrowing_by_borrowing_id(payment['borrowing_id']) %}
+            {% set user = get_user_by_user_id(borrowing['user_id']) %}
+            <tr>
+                <td class="p-10">{{payment['holder_name']}}</td>
+                <td class="p-10">{{payment['fine']}}</td>
+                <td class="p-10">{{payment['payment_date']}}</td>
+                <td class="p-10">{{payment['status']}}</td>
+                <td class="p-10">{{user['name']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <div class="col-4"></div>
+</div>

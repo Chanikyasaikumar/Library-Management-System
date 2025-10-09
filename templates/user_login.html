@@ -1,0 +1,55 @@
+{% include 'head.html' %}
+
+    <div class="row ubg hero">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="mt-100">
+                <div class="card-2 p-20 ">
+                    <form action="user_login_action" method="post">
+                        <div class="card-header h5 text-center mb-20">User Login</div>
+                        <div class="">Select Role
+                            <select name="user_role" class="p-10 box" required>
+                                <option value="">Choose Role</option>
+                                <option value="student" >Student</option>
+                                <option value="faculty" >Faculty</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mt-15">
+                            <label for="email">Email</label>
+                            <div class="input-group mt-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill input-icon" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                  </svg>
+                                <input type="email" name="email" id="email" class="form-input box " placeholder=" Email Id" required>
+                            </div>
+                        </div>
+
+                        <div class="mt-20">
+                            <label for="password">Password</label>
+                            <div class="input-group mt-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill input-icon" viewBox="0 0 16 16">
+                                    <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                                  </svg>
+                                <input type="password" name="password" id="password" class="form-input box" placeholder=" Password" required>
+                            </div>
+                        </div>
+                        <div class="mt-30">
+                            <input type="submit" class="btn btn-primary" value="Login">
+                        </div>
+                        <div class="mt-20 ">
+                            <div class=" ">
+                                Not having an account? <a href="user_registration" class="text-white tn">Register Here</a>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-4"></div>
+
+    </div>
+
+

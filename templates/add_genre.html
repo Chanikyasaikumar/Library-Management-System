@@ -1,0 +1,50 @@
+{% include 'ahead.html' %}
+
+<body class="admin">
+    <div class="row mt-100 ml-50">
+        <div class="col-6">
+            <body>
+                <div class="row card p-30">
+                    <form action="add_genre_action">
+                        <div>
+                            <label for="genre" class="text-bold">Add Genre</label>
+                            <div class="mt-10">
+                                <input type="text" id="genre" name="genre" class="p-10 box " required placeholder="Enter Genre Type">
+                            </div>
+                    
+                            <div class="">
+                                <input type="submit" class="btn-primary box p-15 mt-20" value="Register">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </body>
+        </div>
+        <div class="col-6">
+            <div class="card p-10">
+                <table border="2" class="table">
+                    <thead>
+                        <tr>
+                            <th class="p-10">Genres</th>
+                        </tr>
+                    </thead>
+        
+                     <tbody>
+                        {% for genre in genres %}
+                        <tr>
+                            <td class="text-center P-10">{{genre['genre_name']}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+
+
+
+
+

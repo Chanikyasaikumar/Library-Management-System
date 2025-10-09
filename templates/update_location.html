@@ -1,0 +1,22 @@
+{% include 'ahead.html'%}
+
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 card mt-100">
+        <div class="h3 mt-20" style="text-align:center;">Update Location</div>
+        <form action="update_location_action"  class="p-15 ml-10 mt-10">
+                <input type="hidden" name="location_id" value="{{location['_id']}}">
+                        <div>
+                             <label for="location_name">Location</label>
+                             <div class="input-group">
+                                 <input type="text" id="location_name" name="location_name" class="p-10 mt-5 box width" value="{{location['location_name']}}">
+                             </div>
+                        </div>
+                    <div class="mt-10">
+                        <input type="submit" class="btn" value="Update Location">
+                    </div>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>

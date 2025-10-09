@@ -1,0 +1,93 @@
+
+{% if session['role'] =='admin'%}
+    {% include 'ahead.html'%}
+{% elif session['role']=='librarian'%}
+    {% include 'lhead.html'%}
+{% endif %}
+
+<body class="admin ">
+    <div class="row mt-100 ml-50">
+        <div class="col-4 card">
+            <form class=" p-15" action="add_media_action" method="post" enctype="multipart/form-data">
+                
+                <label class="text-center h5">Add Media</label>
+                <div>
+                    <label for="media_title">Media_Title</label>
+                    <input type="text" name="media_title" id="media_title" class="box mt-10 p-5" placeholder="Enter Media Title" required>
+                </div>
+                <div>
+                    <label for="media_type">Media_Type</label>
+                    <input type="text" name="media_type" id="media_type" placeholder="Enter Media Type" class="box mt-10 p-5" required>
+                </div>
+                <div>
+                     <label for="picture">Picture</label>
+                     <div class="">
+                         <input type="file" id="picture" name="picture" class="p-5 ">
+                     </div>
+                </div>
+                <div>
+                    <label for="media_author">Media_Author</label>
+                    <input type="text" name="media_author" id="media_author" placeholder="Enter Media Author"  class="box mt-10 p-5" required>
+                </div>
+
+                {% if session['role']=='librarian'%}
+                    <div>
+                        <label for="media_copies">Media Copies</label>
+                          <input type="number" id="media_copies" name="media_copies" class="p-10 mt-5 box " required placeholder="Enter No.Of Copies">
+                    </div>
+                {% endif %}
+                <div>
+                    <label for="about_media">About_Media</label>
+                    <input type="text" name="about_media" id="about_media" placeholder="About Media" class="box mt-10 p-10" required>
+                </div>
+                <div>
+                    <label for="year">Year</label>
+                    <input type="number" name="year" id="year" class="box mt-10 p-5" placeholder="Year" required>
+                </div>
+                <div>
+                    <input type="submit" class="btn mt-10" value="Add Media">
+                </div>
+            </form>
+        </div>
+        <div class="col-8 ml-50">
+             {% if session['role'] == "admin" %}
+             <div class="row">
+                {% for media in medias %}
+                 {% set book_copies = get_book_copies_by_media_id(media['_id'])%}
+                <div class="row col-3 p-10 ">
+                    <div class="cardd text-center">
+                        <div><img src="../static/media_image/{{media['picture']}}" width="100%" height="50%"></div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Media Title:</h4>{{media['media_title']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Media Type:</h4>{{media['media_type']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Author:</h4>{{media['media_author']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">About Media:</h4>{{media['about_media']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Year:</h4>{{media['year']}}</div>
+                    </div>
+                </div>
+                {% endfor %}
+             </div>
+            {% elif session['role'] == "librarian" %}
+            <div class="row">
+                {% for media in medias %}
+                <div class="row col-3 p-10 ">
+                    <div class="cardd text-center">
+                        <div><img src="../static/media_image/{{media['picture']}}" width="100%" height="50%"></div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Media Title:</h4>{{media['media_title']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Media Type:</h4>{{media['media_type']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Author:</h4>{{media['media_author']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">About Media:</h4>{{media['about_media']}}</div>
+                        <div class="mt-5"><h4 style="display: inline-block;">Year:</h4>{{media['year']}}</div>
+                        <div class="mt-5">
+                            <a href="view_media_copies?media_id={{media['_id']}}"  class="text" style="background:darkorange;color:white;border-radius:3px">View Copies</a>
+                            <a href="update_media_copies?media_id={{media['_id']}}" class="text " style="background:darkorange;color:white;border-radius:3px">Update Copies</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+

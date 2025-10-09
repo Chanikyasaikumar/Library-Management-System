@@ -1,0 +1,23 @@
+{% include 'uhead.html'%}
+<form action="view_media">
+ <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8 mt-10">
+            <input type="text" name="search_keyword" value="{{search_keyword}}" onchange="this.form.submit()" placeholder="Search media..." class="search-input box p-10" required style="width:40%">
+<!--            <button type="submit" class="search-button box p-10 " style="width:20%">🔍Search</button>-->
+        </div>
+    </div>
+ </form>
+<div class="row">
+    {% for media in medias %}
+    <div class="row col-3 p-10 ">
+        <div class="cardd text-center">
+            <div><img src="../static/media_image/{{media['picture']}}" width="100%" height="50%"></div>
+            <div class="mt-5"><h4 style="display: inline-block;">Media Title:</h4>{{media['media_title']}}</div>
+            <div class="mt-5"><h4 style="display: inline-block;">Author:</h4>{{media['media_author']}}</div>
+            <div class="mt-5"><h4 style="display: inline-block;">About Media:</h4>{{media['about_media']}}</div>
+            <a class="a-href text" href="buy?media_id={{media['_id']}}" style="background:darkorange;color:white;border-radius:3px">Send Request</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>

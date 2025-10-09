@@ -1,0 +1,19 @@
+{% include 'lhead.html'%}
+
+<div class="row mt-40">
+    {% for book_copy in book_copies%}
+    {% set is_assign = get_is_book_assigned(borrowing['_id'],book_copy['_id'])%}
+    {% if is_assign == 0%}
+    <div class="col-3">
+        <div class="card p-20 mt-10">
+           CopyNumber :  {{book_copy['book_copy_number']}}
+            <a class="a-href text p-10" style="background:darkorange;color:white;border-radius:3px" href="assign?book_copies_id={{book_copy['_id']}}&borrowing_id={{borrowing['_id']}}">Assign</a>
+        </div>
+    </div>
+    {% endif%}
+        
+    {% endfor %}
+</div>
+
+{{borrowings}}
+

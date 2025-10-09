@@ -1,0 +1,63 @@
+{% include 'ahead.html'%}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+            <div class="ml-10 p-30">
+                    <div class="card-2 mt-100 p-15">
+                        <div class=" text-center h4">Update Librarian </div>
+
+                        <form action="update_librarian_action" >
+                            <input type="hidden" name="librarian_id" value="{{librarian['_id']}}">
+                            <div>
+                                <label for="library_title">Library_Title</label>
+                                <div class="input-group">
+                                    <input type="text" id="library_title" name="library_title" class="form-input box" value="{{librarian['library_title']}}" required placeholder="Enter Library_Title">
+                                </div>
+                                <div>
+                                    <label for="librarian_name">Librarian_Name</label>
+                                    <div class="input-group">
+                                        <input type="text" id="librarian_name" name="librarian_name" class="form-input box" value="{{librarian['librarian_name']}}" required placeholder="Enter Library_Name">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="email">Email</label>
+                                    <div class="input-group">
+                                        <input type="email" id="email" name="email" class="form-input box" required value="{{librarian['email']}}" placeholder="Enter Email ID">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="phone">Phone Number</label>
+                                    <div class="input-group">
+                                        <input type="number" id="phone" name="phone" class="form-input box" required value="{{librarian['phone']}}" placeholder="Enter Phone Number">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="address">Address</label>
+                                    <div class="input-group">
+                                        <textarea id="address" name="address" class="form-input box" required  placeholder="Enter Address"></textarea>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div>Location</div>
+
+                                    <select class="form-input box" name="location" required>
+                                        <option value="">Choose Location</option>
+                                        {% for location in locations %}
+                                            <option value="{{location['_id']}}">{{location['location_name']}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="mt-20">
+                                    <input type="submit" class="btn-primary width p-15 box" value="Update">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+    </div>
+    <div class="col-4"></div>
+</div>
+

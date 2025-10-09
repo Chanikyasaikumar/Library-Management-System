@@ -1,0 +1,31 @@
+{% include 'uhead.html'%}
+
+<div class="p-10">
+    <table border="1" style="width:100%" class="mt-50 table">
+        <thead>
+            <tr>
+                <th class="p-10">Librarian</th>
+                <th>Location</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for Book_Copy_number in Book_Copy_numbers%}
+           {% set librarian = get_library_librarian_id(Book_Copy_number) %}
+          {% set location = get_location_by_location_id(librarian['location'])%}
+            <tr class="text-center">
+                <td class="p-10">{{librarian['librarian_name']}}</td>
+                <td>
+                   {{location['location_name']}}
+                </td>
+                <td><a href="buy_request?book_id={{book_id}}&librarian_id={{Book_Copy_number}}&media_id={{media_id}}" class="text p-5" style="background:darkorange;color:white;border-radius:3px">Send Request</a> </td>
+            </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+</div>
+
+
+<form></form>

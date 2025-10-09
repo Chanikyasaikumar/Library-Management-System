@@ -1,0 +1,26 @@
+{% include 'uhead.html'%}
+<form action="view_books">
+ <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8 mt-10">
+            <input type="text" name="search_keyword" value="{{search_keyword}}" onchange="this.form.submit()" placeholder="Search books..." class="search-input box p-10" required style="width:40%">
+<!--            <button type="submit" class="search-button box p-10 " style="width:20%">🔍Search</button>-->
+        </div>
+    </div>
+</form>
+
+<div class="row">
+ {% for book in books %}
+    {% set genre =get_genre_name_by_genre_id(book['genre_id'])%}
+
+    <div class="row col-3 p-10 ">
+        <div class="cardd text-center">
+            <div><img src="../static/book_image/{{book['picture']}}" width="25%" height=15%"></div>
+            <div class="mt-5 h4">{{book['book_title']}}</div>
+            <div class="mt-5"><h4 style="display: inline-block;">Author:</h4> {{book['author']}}</div>
+            <div class="mt-5"><h4 style="display: inline-block;"> Genre:</h4> {{genre['genre_name']}}</div>
+            <a class="a-href text" href="buy?book_id={{book['_id']}}" style="background:darkorange;color:white;border-radius:3px">Sent Request</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
