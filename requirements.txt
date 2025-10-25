@@ -1,2 +1,5 @@
-Flak
-Pymongo
+Flask
+gunicorn==20.1.0  
+pymongo
+mysqlclient
+python-dotenv
