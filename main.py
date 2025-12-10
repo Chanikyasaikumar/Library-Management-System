@@ -19,7 +19,7 @@ user_password = "admin"
 
 # mongodb+srv://chanikya668_db_user:L09X9uKRBkZg3ebA@lms.yjtc41s.mongodb.net/
 MONGO_URL = os.environ.get("mongodb+srv://chanikya668_db_user:L09X9uKRBkZg3ebA@lms.yjtc41s.mongodb.net/")
-my_client = pymongo.MongoClient(mongodb+srv://chanikya668_db_user:L09X9uKRBkZg3ebA@lms.yjtc41s.mongodb.net/)
+my_client = pymongo.MongoClient("mongodb+srv://chanikya668_db_user:L09X9uKRBkZg3ebA@lms.yjtc41s.mongodb.net/")
 # my_client = pymongo.MongoClient("mongodb://localhost:27017")
 my_database = my_client["LMS"]
 admin_collection = my_database["Admin"]
