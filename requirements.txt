@@ -1,5 +1,5 @@
 Flask
-gunicorn main:app
+gunicorn==20.1.0
 pymongo
 mysqlclient
 python-dotenv
